@@ -4,7 +4,9 @@ export const database = ()=>{ mongoose
   .connect(process.env.databaseURL, {
     dbName: "ToDoApp",
   })
-  .then(console.log("database is connected"))
+  .then((c)=>{
+    console.log(`database is connected on ${c.connection.host}`)
+  })
   .catch((err) => {
     console.log(err);
   });
