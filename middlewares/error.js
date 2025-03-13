@@ -15,3 +15,10 @@ export const ErrorMiddleware = (err, req, res, next) => {
 };
 
 export default errorHandler;
+
+// Access
+// 1.  next(new Error ("dflkgfdkj"))
+// 2. catch(error){
+// next(error)
+// }
+// 3.next(new errorHandler("f;kvjdk",500))

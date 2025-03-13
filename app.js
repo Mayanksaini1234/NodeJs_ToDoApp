@@ -9,7 +9,6 @@ dotenv.config({
     path:"./data/.env"
 });
 
-// middlewares
 
 export const app = express();
  app.get("/", (req,res)=>{

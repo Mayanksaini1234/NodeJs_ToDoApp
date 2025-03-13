@@ -57,7 +57,7 @@ export const registerUser = async (req, res , next) => {
 export const logoutUser = async (req, res , next) => {
   try {
     res.cookie("token", null, {
-      hhttpOnly: true,
+      httpOnly: true,
       maxAge:15 * 60 * 1000,
       sameSite: process.env.NODE_ENV==="development"? "lax" :"none",
       secure: process.env.NODE_ENV==="development"? false :true
