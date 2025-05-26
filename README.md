@@ -38,6 +38,5 @@ Make sure you have the following installed on your machine:
 
 ## API Endpoints <br>
 ### TASK Endpoints -
-
 ### USERs Endpoints -
 
