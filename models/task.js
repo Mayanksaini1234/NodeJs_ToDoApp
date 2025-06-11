@@ -14,6 +14,7 @@ const task_schema = new mongoose.Schema({
     ref: "users",
     require: true,
   },
+  // Authenticated user is done by  this 
   isCompleted: {
     type: Boolean,
     default: false,

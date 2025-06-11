@@ -2,10 +2,9 @@
 
 A simple Node.js backend application for managing a To-Do list. This project demonstrates basic CRUD operations using Express and MongoDB.
 
-
 ## Description
 
-This application is a RESTful API built with Node.js, Express, and MongoDB. It allows users to create, read, update, and delete to-do items. 
+This application is a RESTful API built with Node.js, Express, and MongoDB. It allows users to create, read, update, and delete to-do items.
 
 ## Prerequisites
 
@@ -19,24 +18,37 @@ Make sure you have the following installed on your machine:
 
 1. Clone the repository:
 
-    ```sh
-    git clone https://github.com/Mayanksaini1234/NodeJS_ToDo
-  
-    ```
+   ```sh
+   git clone https://github.com/Mayanksaini1234/NodeJS_ToDo
+
+   ```
 
 2. Install dependencies:
 
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
 3. Start the server:
 
-    ```sh
-    npm start
-    ```
+   ```sh
+   npm start
+   ```
 
-## API Endpoints <br>
-### TASK Endpoints -
-### USERs Endpoints -
+<!-- End Points-
 
+USER
+/api/user/users  
+/api/user/my
+/api/user/login
+/api/user/logout
+/api/user/register
+
+TASKS
+get -> /api/task/alltasks
+get my task -> /api/task/tasks
+post my task -> /api/task/tasks
+put -> /api/task/:id
+delete -> /api/task/:id
+
+Backend URL => https://todoapppractice.onrender.com -->

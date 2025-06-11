@@ -38,6 +38,7 @@ export const registerUser = async (req, res , next) => {
     const { name, email, password } = req.body;
     const UserExist = await user.findOne({ email });
 
+    console.log(req.body)
     if (UserExist) return next(new errorHandler("User already exist, Try logging In",400))
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -75,5 +76,6 @@ export const getMyProfile = (req, res) => {
   res.status(200).json({
     success: true,
     user: req.user,
+    // req.user hai ye isAuthenticated middleware se access ho rha hai 
   });
 };

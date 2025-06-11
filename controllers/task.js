@@ -1,5 +1,6 @@
 import { task } from "../models/task.js";
 import errorHandler from "../middlewares/error.js";
+
 export const getMyTask = async (req, res, next) => {
   try {
     const Task = await task.find({ user: req.user._id });
@@ -49,7 +50,6 @@ export const updateTask = async (req, res, next) => {
     const Task = await task.findById(id);
     if (!Task) return next(new errorHandler("Task not found", 400));
     Task.isCompleted = !Task.isCompleted;
-
     await Task.save();
 
     res.status(201).json({

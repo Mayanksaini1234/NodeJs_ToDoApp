@@ -4,7 +4,6 @@ const user_schema = new mongoose.Schema({
     name: {
         type: String,
         require: true,
-        unique: true
     },
     email: {
         type: String,
@@ -15,7 +14,7 @@ const user_schema = new mongoose.Schema({
         type: String,
         require: true,
         select: true
-        // ye db mai show nii krega 
+        // ye db mai show nii krega / ya krega  
     },
     createdAt: {
         type: Date,
