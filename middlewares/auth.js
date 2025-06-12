@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 import { user } from "../models/user.js";
-
+import errorHandler from "./error.js";
 export const isAuthenticated = async(req, res, next) => {
 
-  const { token } = req.cookies;
+  try {
+      const { token } = req.cookies;
 
   if (!token) {
     return res.status(401).json({
@@ -15,5 +16,8 @@ export const isAuthenticated = async(req, res, next) => {
     const decoded = jwt.verify(token, process.env.SECRET);
     req.user = await user.findById(decoded._id)
  next();
+
+  } catch (error) {
+next(new errorHandler("Login first!",500))  }
   
 };
