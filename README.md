@@ -1,5 +1,4 @@
 # Node.js To-Do Application
-Backend URL => https://todoapppractice.onrender.com <br>
 A simple Node.js backend application for managing a To-Do list. This project demonstrates basic CRUD operations using Express and MongoDB.
 
 ## Description
@@ -35,20 +34,3 @@ Make sure you have the following installed on your machine:
    npm start
    ```
 
-<!-- End Points-
-
-USER
-/api/user/users  
-/api/user/my
-/api/user/login
-/api/user/logout
-/api/user/register
-
-TASKS
-get -> /api/task/alltasks
-get my task -> /api/task/tasks
-post my task -> /api/task/tasks
-put -> /api/task/:id
-delete -> /api/task/:id
-
- -->
