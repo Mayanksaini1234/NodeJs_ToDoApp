@@ -5,9 +5,11 @@ import TaskRouter from "./routes/task.js";
 import cookieParser from "cookie-parser";
 import { ErrorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
-dotenv.config({
-    path:"./data/.env"
-});
+import passport from "passport";
+import "./config/passport.js";
+
+dotenv.config();
+
 
 export const app = express();
 app.get("/", (req,res)=>{
@@ -27,6 +29,9 @@ app.get("/", (req,res)=>{
     credentials:true
 }))
 // To connect to frontend 
+
+app.use(passport.initialize());
+
 
  app.use("/api/user",UserRouter)
  app.use("/api/task",TaskRouter)

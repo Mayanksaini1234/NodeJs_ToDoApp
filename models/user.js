@@ -20,6 +20,9 @@ const user_schema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+     googleId: {
+        type: String,
+    },
 });
 
 export const user = mongoose.model("users", user_schema);
