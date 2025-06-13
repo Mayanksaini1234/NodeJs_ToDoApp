@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-// backendkjkjk
+
 export const database = ()=>{ mongoose
   .connect(process.env.databaseURL, {dbName:"ToDoApp"})
   .then((c)=>{
