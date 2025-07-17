@@ -20,9 +20,15 @@ const user_schema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-     googleId: {
+    googleId: {
         type: String,
     },
+    resetPasswordToken: {
+        type: String
+    },
+    resetPasswordExpiry: {
+        type: Date
+    }
 });
 
 export const user = mongoose.model("users", user_schema);

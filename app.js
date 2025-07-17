@@ -7,33 +7,28 @@ import { ErrorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
 import passport from "passport";
 import "./config/passport.js";
-
 dotenv.config();
 
-
 export const app = express();
-app.get("/", (req,res)=>{
-    res.end("lol")
- });
+app.get("/", (req, res) => {
+    res.end("ToDoBackendAPI")
+});
 
 //  Middlewares 
- app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 //  access req.body 
- app.use(express.json())
+app.use(express.json())
 //  Parses incoming JSON and puts it in req.body 
- app.use(cookieParser());
+app.use(cookieParser());
 //  access cookie token  req.cookies
- app.use(cors({
-    origin:[process.env.FRONTEND_URL],
-    methods:["GET","POST","PUT","DELETE"],
-    credentials:true
+app.use(cors({
+    origin: [process.env.FRONTEND_URL],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
 }))
 // To connect to frontend 
 
 app.use(passport.initialize());
-
-
- app.use("/api/user",UserRouter)
- app.use("/api/task",TaskRouter)
- app.use(ErrorMiddleware);
- 
+app.use("/api/user", UserRouter)
+app.use("/api/task", TaskRouter)
+app.use(ErrorMiddleware);

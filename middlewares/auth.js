@@ -9,12 +9,13 @@ export const isAuthenticated = async(req, res, next) => {
   if (!token) {
     return res.status(401).json({
       success: false,
-      message: "Login First",
+      message: "Login First!",
     });
   }
 
     const decoded = jwt.verify(token, process.env.SECRET);
     req.user = await user.findById(decoded._id)
+    // VVimp step 
  next();
 
   } catch (error) {
