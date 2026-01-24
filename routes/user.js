@@ -5,7 +5,7 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 const router = express.Router();
 
-// Redirect user to Google for authentication
+// Redirect user to Google for authentication , we will use this end point 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 // Google callback route [It is responsible for the whole authentication]
@@ -28,7 +28,7 @@ router.get(
         });
 
         // Redirect to frontend without token in query
-        res.redirect(`${process.env.FRONTEND_URL}/x1?token=${token}`);
+        res.redirect(`${process.env.FRONTEND_URL}`);
     }
 );
 

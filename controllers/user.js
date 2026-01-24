@@ -101,7 +101,7 @@ export const forgotPassword = async (req, res, next) => {
     const { email } = req.body;
     if (!email || !validator.isEmail(email)) {
       return next(new errorHandler("Please provide a valid email", 400));
-    }
+    } 
     const User = await user.findOne({ email });
     if (!User) return next(new errorHandler("User not exist", 404));
     if (!User.password) return next(new errorHandler("This account is registered via Google. Please login with Google", 400))
@@ -115,6 +115,7 @@ export const forgotPassword = async (req, res, next) => {
     await User.save();
 
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+    // This is end point for the frontend UI for changing password  
     const message = `Click the link to reset your password: ${resetUrl}`;
     try {
       await sendEmail(User.email, "Reset To Do App password", message);

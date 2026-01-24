@@ -15,17 +15,32 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let User = await user.findOne({ googleId: profile.id });
 
-        if (!User) {
-          User = await user.create({
-            name: profile.displayName,
-            email: profile.emails[0].value,
-            googleId: profile.id,
-          });
+        const email = profile.emails?.[0]?.value;
+
+        if (!email) {
+          return done(new Error("No email found in Google profile"), false);
         }
 
+        let User = await user.findOne({ email });
+
+        if (User) {
+          if (!User.googleId) {
+            User.googleId = profile.id;
+            await User.save();
+          }
+
+          return done(null, User);
+        }
+
+        User = await user.create({
+          name: profile.displayName,
+          email: email,
+          googleId: profile.id,
+        });
+
         return done(null, User);
+
       } catch (err) {
         return done(err, false);
       }

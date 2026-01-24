@@ -20,4 +20,5 @@ export default errorHandler;
 // 1. catch(error){
 // next(error)  
 // }
-// 2.next(new errorHandler("f;kvjdk",500))
+// 2.catch(error){
+// next(new errorHandler("f;kvjdk",500)) } 

@@ -3,16 +3,16 @@ import mongoose from "mongoose";
 const user_schema = new mongoose.Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true
     },
     password: {
         type: String,
-        require: true,
+        required: false,
         select: true
         // ye db mai show nii krega / ya krega  
     },
@@ -22,6 +22,11 @@ const user_schema = new mongoose.Schema({
     },
     googleId: {
         type: String,
+        unique: true,
+        sparse: true
+        // ✅ unique + sparse means:
+        // - unique for Google users
+        // - normal users can have googleId empty/null without error
     },
     resetPasswordToken: {
         type: String
