@@ -8,11 +8,11 @@ export const cookieCode = async (User, res, statusCode = 200, message) => {
   return res
     .status(statusCode)
     .cookie("token", token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    })
+  httpOnly: true,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  secure: process.env.NODE_ENV === "production",
+})
     .json({
       success: true,
       message: message,
