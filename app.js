@@ -11,7 +11,6 @@ import { globalLimiter } from "./middlewares/rateLimiter.js";
 dotenv.config();
 
 export const app = express();
-app.use(globalLimiter);
 
 app.get("/", (req, res) => {
     res.end("ToDoBackendAPI")
@@ -31,6 +30,7 @@ app.use(cors({
 }))
 // To connect to frontend 
 
+app.use(globalLimiter);
 app.use(passport.initialize());
 app.use("/api/user", UserRouter)
 app.use("/api/task", TaskRouter)

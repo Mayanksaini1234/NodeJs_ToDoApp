@@ -1,21 +1,20 @@
 import jwt from "jsonwebtoken";
 
-export const cookieCode = async(User,res,stausCode=200,message)=>{
-          const token = jwt.sign({ _id: User._id }, process.env.SECRET, {
-            expiresIn: "7d",
-          });
-    
-          return res
-            .status(stausCode)
-            .cookie("token", token, {
-              httpOnly: true,
-              maxAge:15 * 60 * 1000,
-              sameSite: "lax",
-              secure: false
-            })
-            .json({
-              success: true,
-              message: message,
-            });
-    
-}
+export const cookieCode = async (User, res, statusCode = 200, message) => {
+  const token = jwt.sign({ _id: User._id }, process.env.SECRET, {
+    expiresIn: "7d",
+  });
+
+  return res
+    .status(statusCode)
+    .cookie("token", token, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    })
+    .json({
+      success: true,
+      message: message,
+    });
+};
