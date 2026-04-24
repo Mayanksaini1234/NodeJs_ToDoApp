@@ -7,13 +7,13 @@ import { ErrorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
 import passport from "passport";
 import "./config/passport.js";
-import { globalLimiter } from "./middlewares/rateLimiter.js";
+// import { globalLimiter } from "./middlewares/rateLimiter.js";
 dotenv.config();
 
 export const app = express();
 
 app.get("/", (req, res) => {
-    res.end("ToDoBackendAPI")
+    res.end("ToDoBackendAPI by Mayank Saini ")
 });
 
 //  Middlewares 
@@ -30,7 +30,7 @@ app.use(cors({
 }))
 // To connect to frontend 
 
-app.use(globalLimiter);
+// app.use(globalLimiter);
 app.use(passport.initialize());
 app.use("/api/user", UserRouter)
 app.use("/api/task", TaskRouter)
