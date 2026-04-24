@@ -31,8 +31,8 @@ export const loginUser = async (req, res, next) => {
       return next(
         new errorHandler(
           "This account is registered via Google. Please login with Google",
-          400
-        )
+          400,
+        ),
       );
     }
     const matchedPassword = await bcrypt.compare(password, User.password);
@@ -101,10 +101,16 @@ export const forgotPassword = async (req, res, next) => {
     const { email } = req.body;
     if (!email || !validator.isEmail(email)) {
       return next(new errorHandler("Please provide a valid email", 400));
-    } 
+    }
     const User = await user.findOne({ email });
     if (!User) return next(new errorHandler("User not exist", 404));
-    if (!User.password) return next(new errorHandler("This account is registered via Google. Please login with Google", 400))
+    if (!User.password)
+      return next(
+        new errorHandler(
+          "This account is registered via Google. Please login with Google",
+          400,
+        ),
+      );
     const resetToken = crypto.randomBytes(20).toString("hex");
     const hashedToken = crypto
       .createHash("sha256")
@@ -115,7 +121,7 @@ export const forgotPassword = async (req, res, next) => {
     await User.save();
 
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
-    // This is end point for the frontend UI for changing password  
+    // This is end point for the frontend UI for changing password
     const message = `Click the link to reset your password: ${resetUrl}`;
     try {
       await sendEmail(User.email, "Reset To Do App password", message);
@@ -130,6 +136,7 @@ export const forgotPassword = async (req, res, next) => {
       return next(new errorHandler("Email is not sent", 500));
     }
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -139,17 +146,17 @@ export const resetPassword = async (req, res, next) => {
     const { token } = req.params;
     const { password } = req.body;
 
-    const hashedToken = crypto
-      .createHash("sha256")
-      .update(token)
-      .digest("hex");
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
 
     const User = await user.findOne({
       resetPasswordToken: hashedToken,
       resetPasswordExpiry: { $gt: Date.now() },
     });
 
-    if (!User) return next(new errorHandler("Resetting password time is out , try again", 404));
+    if (!User)
+      return next(
+        new errorHandler("Resetting password time is out , try again", 404),
+      );
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -164,6 +171,26 @@ export const resetPassword = async (req, res, next) => {
       message: "User's Password changed successfully",
     });
   } catch (error) {
+        console.log(error);
+    next(error);
+  }
+};
+
+export const updateUserName = async (req, res, next) => {
+  try {
+    const { name } = req.body;
+    const User = await user.findById(req.user._id);
+
+    if(!User) return next(new errorHandler("User Not found",404));
+    User.name = name || User.name;
+    await User.save();
+    res.status(200).json({
+      success: true,
+      message: "User name updated successfully",
+      user:User
+    });
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };

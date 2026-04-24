@@ -1,6 +1,8 @@
 import express from "express";
-import { getAllusers, loginUser, logoutUser, registerUser, getMyProfile , forgotPassword , resetPassword } from "../controllers/user.js";
+import { getAllusers, loginUser, logoutUser, registerUser, getMyProfile , forgotPassword , resetPassword, updateUserName } from "../controllers/user.js";
 import { isAuthenticated } from "../middlewares/auth.js";
+import { registerValidation ,loginValidation } from "../validators/userValidator.js";
+import { validate } from "../middlewares/validationMiddleware.js";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 const router = express.Router();
@@ -34,9 +36,11 @@ router.get(
 
 router.get("/users", getAllusers)
 router.get("/my", isAuthenticated, getMyProfile)
-router.post("/login", loginUser)
-router.post("/register", registerUser)
+router.post("/login", loginValidation , validate,loginUser)
+router.post("/register", registerValidation , validate , registerUser)
 router.post("/logout", logoutUser)
 router.post("/forgotPassword",forgotPassword)
 router.put('/reset-password/:token',resetPassword )
+router.put("/updateUser",isAuthenticated,updateUserName);
+
 export default router;
