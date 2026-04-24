@@ -2,7 +2,7 @@ import rateLimit from "express-rate-limit";
 
 export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 min
-  max: 5, // only 5 attempts
+  max: 100, // only 5 attempts
 
   handler: (req, res) => {
     return res.status(429).json({
