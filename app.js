@@ -7,9 +7,12 @@ import { ErrorMiddleware } from "./middlewares/error.js";
 import cors from "cors";
 import passport from "passport";
 import "./config/passport.js";
+import { globalLimiter } from "./middlewares/rateLimiter.js";
 dotenv.config();
 
 export const app = express();
+app.use(globalLimiter);
+
 app.get("/", (req, res) => {
     res.end("ToDoBackendAPI")
 });

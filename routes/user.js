@@ -5,6 +5,7 @@ import { registerValidation ,loginValidation } from "../validators/userValidator
 import { validate } from "../middlewares/validationMiddleware.js";
 import passport from "passport";
 import jwt from "jsonwebtoken";
+import { authLimiter } from "../middlewares/authRateLimiter.js";
 const router = express.Router();
 
 // Redirect user to Google for authentication , we will use this end point 
@@ -36,8 +37,8 @@ router.get(
 
 router.get("/users", getAllusers)
 router.get("/my", isAuthenticated, getMyProfile)
-router.post("/login", loginValidation , validate,loginUser)
-router.post("/register", registerValidation , validate , registerUser)
+router.post("/login", authLimiter, loginValidation , validate,loginUser)
+router.post("/register", authLimiter, registerValidation , validate , registerUser)
 router.post("/logout", logoutUser)
 router.post("/forgotPassword",forgotPassword)
 router.put('/reset-password/:token',resetPassword )
