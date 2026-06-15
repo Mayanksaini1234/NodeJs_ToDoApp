@@ -18,7 +18,7 @@ export default errorHandler;
 
 // Access
 // 1. catch(error){
-// next(error)  
+// next(error)
 // }
 // 2.catch(error){
 // next(new errorHandler("f;kvjdk",500)) } 
