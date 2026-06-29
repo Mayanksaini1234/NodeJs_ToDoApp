@@ -133,6 +133,7 @@ export const forgotPassword = async (req, res, next) => {
       User.resetPasswordExpiry = undefined;
       User.resetPasswordToken = undefined;
       await User.save();
+       console.log("EMAIL ERROR:", error);
       return next(new errorHandler("Email is not sent", 500));
     }
   } catch (error) {
@@ -171,7 +172,7 @@ export const resetPassword = async (req, res, next) => {
       message: "User's Password changed successfully",
     });
   } catch (error) {
-        console.log(error);
+       console.log("EMAIL ERROR:", error);
     next(error);
   }
 };
