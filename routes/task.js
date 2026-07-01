@@ -13,7 +13,7 @@ router.get("/tasks", isAuthenticated, getMyTask)
 router.route("/tasks")
     .post(isAuthenticated, globalLimiter, taskValidation, validate, postTask)
 router.route("/:id")
-    .put(isAuthenticated, globalLimiter , updateTask)
+    .put(isAuthenticated, globalLimiter, updateTask)
     .delete(isAuthenticated, globalLimiter, deleteParticularTask)
 
 

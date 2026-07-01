@@ -14,11 +14,11 @@ export const isAuthenticated = async(req, res, next) => {
   }
 
     const decoded = jwt.verify(token, process.env.SECRET);
+    // Now decoded contains whole payload 
     req.user = await user.findById(decoded._id)
     // VVimp step 
  next();
 
   } catch (error) {
 next(new errorHandler("Login first!",500))  }
-  
 };

@@ -11,3 +11,14 @@ export const authLimiter = rateLimit({
     });
   },
 });
+
+export const emailLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 min
+  max: 5, // only 5 attempts
+  handler: (req, res) => {
+    res.status(429).json({
+      success: false,
+      message: "Too many requests, please try again later"
+    })
+  }
+})

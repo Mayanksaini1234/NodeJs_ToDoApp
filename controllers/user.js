@@ -28,6 +28,7 @@ export const loginUser = async (req, res, next) => {
     }
 
     if (!User.password) {
+      // or I can do like if User.googleId is present , then do the same 
       return next(
         new errorHandler(
           "This account is registered via Google. Please login with Google",
@@ -35,6 +36,7 @@ export const loginUser = async (req, res, next) => {
         ),
       );
     }
+
     const matchedPassword = await bcrypt.compare(password, User.password);
 
     if (!matchedPassword) {
@@ -105,6 +107,7 @@ export const forgotPassword = async (req, res, next) => {
     const User = await user.findOne({ email });
     if (!User) return next(new errorHandler("User not exist", 404));
     if (!User.password)
+      // can use googleId as well 
       return next(
         new errorHandler(
           "This account is registered via Google. Please login with Google",
@@ -116,6 +119,7 @@ export const forgotPassword = async (req, res, next) => {
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
+      // I can also use jwt and bcrypt 
     User.resetPasswordToken = hashedToken;
     User.resetPasswordExpiry = Date.now() + 15 * 60 * 1000;
     await User.save();
@@ -195,3 +199,6 @@ export const updateUserName = async (req, res, next) => {
     next(error);
   }
 };
+
+
+//done

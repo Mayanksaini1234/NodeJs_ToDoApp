@@ -31,6 +31,13 @@ passport.use(
           }
 
           return done(null, User);
+          // after that req.user defines the user payload 
+          //{
+          //_id:
+          //name:
+          //email:
+          //google_id:
+          // }
         }
 
         User = await user.create({
